@@ -1,11 +1,13 @@
 import React from 'react';
-
+import UserSearch from "./UserSearch.tsx";
 const Header: React.FC = () => {
     return (
         <header className="bg-primary w-full p-4">
             <nav className="flex justify-between items-center">
                 <div className="flex space-x-5 basis-1/2">
                     <span className="text-white font-dancing text-3xl">BeyondTech</span>
+                    <UserSearch />
+
                 </div>
 
                 {/* <input id="people_search" className="px-2 py-1 rounded" type="text" placeholder="Search..." /> */}

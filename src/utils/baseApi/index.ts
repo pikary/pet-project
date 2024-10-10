@@ -10,7 +10,7 @@ interface Config {
     [key: string]: any;
 }
 
-interface ApiResponse<ReturnType> {
+export interface ApiResponse<ReturnType> {
     data: ReturnType;
     headers: Headers;
     statusCode: number;
@@ -35,14 +35,14 @@ const baseRequest = async <ReturnType>(
             signal: config.signal,
             ...config,
         });
+        const result = await req.json();
 
         if (!req.ok) {
             const resbody = await req.text();
             throw new ApiError(req.status,resbody)
         }
-        const result = await req.json();
 
-        return { data: result, headers: req.headers, statusCode: req.status };
+        return { data: result as ReturnType, headers: req.headers, statusCode: req.status };
     } catch (e: any) {
         console.error(e);
         throw e;
