@@ -37,14 +37,5 @@ function Button(props: ButtonProps) {
     );
 }
 
-Button.defaultProps = {
-    icon: null,
-    className: '',
-    onClick: () => {
-    },
-    color: '',
-    text: '',
-    shortenText: '',
-};
 
 export default Button;

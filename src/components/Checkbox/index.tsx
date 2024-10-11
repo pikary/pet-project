@@ -1,24 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useField} from "formik";
 import './styles.scss';
 
 interface CheckboxProps {
+    name:string;
     label: string;
-    checked: boolean;
-    onChange: () => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ name,label }) => {
+    const [field,meta] = useField({name,type:'checkbox'})
+    useEffect(() => {
+        console.log(field.checked)
+    }, [field.checked]);
     return (
-        <label className={'checkbox__container text-lg cursor-pointer' + (checked ? ' checked' : '')}>
-            <input
-                type="checkbox"
-                checked={true}
-                onChange={onChange}
-                className={'checkbox__input mr-4'}
-            />
-            <span className={'checkmark'}></span>
-            {label}
-        </label>
+        <>
+            <label className={'checkbox__container text-base cursor-pointer block ' }>
+                <input
+                    type="checkbox"
+                    className={'checkbox__input mr-4 '+ (field.checked && 'checked')}
+                    {...field}
+                />
+                <span className={`checkmark ${meta.error && 'checkmark-error'}`} style={{background:field.checked ? '#2196F3' : '#eee'}}></span>
+               {label}
+            </label>
+
+        </>
+
     );
 };
 

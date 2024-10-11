@@ -1,14 +1,14 @@
 import React, {useState, ChangeEvent} from 'react';
+import { useField, Form, FormikProps, Formik } from 'formik';
 
 interface InputProps {
     className?: string;
     labelText?: string;
     type?: string;
     placeholder?: string;
-    name?: string;
-    modelValue: string;
+    name: string;
     icon?: string;
-    onModelValueChange: (value: string) => void; // Event for updating the input value
+    margin? :string
 }
 
 const Input: React.FC<InputProps> = ({
@@ -17,18 +17,17 @@ const Input: React.FC<InputProps> = ({
                                          type = 'text',
                                          placeholder,
                                          name,
-                                         modelValue,
                                          icon,
-                                         onModelValueChange
+                                        margin
                                      }) => {
     const [focus, setFocus] = useState(false);
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        onModelValueChange(e.target.value); // Emit the input value change event
-    };
+
+    const [field,meta,helpers] = useField({name:name, type:'text'});
+
 
     return (
-        <div>
+        <div className={margin}>
             {labelText && (
                 <label htmlFor={name} className="block text-gray-700 text-lg font-bold mb-2">
                     {labelText}
@@ -44,16 +43,16 @@ const Input: React.FC<InputProps> = ({
                     id={name}
                     type={type}
                     placeholder={placeholder}
-                    value={modelValue}
-                    onChange={handleInputChange}
                     onFocus={() => setFocus(true)}
-                    onBlur={() => setFocus(false)}
                     className={`px-2 py-1 rounded border border-transparent focus:border-black focus:shadow-[0px_0px_10px_1px_gray] transition ease-in-out delay-330 ${className}`}
                     aria-label={placeholder || labelText}
                     autoComplete="off"
                     style={{paddingLeft: icon ? '30px' : undefined}} // Adjust padding if icon exists
+                    {...field}
                 />
             </div>
+            {meta.error && <span className={'block text-red-500 text-sm'}>{meta.error}</span>}
+
         </div>
     );
 };

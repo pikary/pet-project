@@ -17,13 +17,8 @@
   cursor: pointer;
   height: 0;
   width: 0;
-
-  &:checked{
-    .checkmark{
-      background:  #2196F3 !important;
-    }
-  }
 }
+
 
 /* Style the checkmark/indicator */
 .checkmark:after {
@@ -39,12 +34,16 @@
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
+
 .checkmark:after {
   content: "";
   position: absolute;
-  display: block;
+  display: none;
 }
 
+.checkbox__input:checked ~ .checkmark:after {
+  display: block;
+}
 
 .checkmark{
   position: absolute;
@@ -53,8 +52,18 @@
   background: #eee;
   height: 25px;
   width: 25px;
+  border-width: 0.05rem;
+  border-color: gray;
+  transition: background 0.1s ease-in-out;
+
   &:hover{
     cursor: pointer;
     background: #ccc;
+  }
+}
+
+.checkmark-error{
+  &:after{
+    //border: solid red;/
   }
 }
