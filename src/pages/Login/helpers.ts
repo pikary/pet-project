@@ -1,10 +1,7 @@
 import * as Yup from 'yup';
+import {LoginFormValues} from "../../store/users/types.ts";
 
-export interface LoginFormValues {
-    email: string;
-    password: string;
-    isRemember: boolean;
-}
+
 
 export const initialValues:LoginFormValues={
     email:'',

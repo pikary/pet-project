@@ -1,3 +1,4 @@
+
 interface Geo  {
     lat: string;
     lng: string;
@@ -27,3 +28,34 @@ export interface User  {
     company: Company;
 }
 
+export interface RegisterFormValues {
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    passwordRepeat: string;
+    isConsent: boolean;
+}
+export interface LoginFormValues {
+    email: string;
+    password: string;
+    isRemember: boolean;
+}
+
+export interface RegisterResponse {
+    user: User;
+    tokens: {
+        accessToken: string;
+        //TODO: delete refresh token
+        refreshToken: string;
+    }
+}
+
+export interface LoginResponse{
+    user:User,
+    tokens: {
+        accessToken: string;
+        //TODO: delete refresh token
+        refreshToken: string;
+    }
+}

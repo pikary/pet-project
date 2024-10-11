@@ -1,13 +1,6 @@
 import * as Yup from 'yup';
+import {RegisterFormValues} from "../../store/users/types.ts";
 
-export interface RegisterFormValues {
-    email: string;
-    firstName: string;
-    lastName: string;
-    password: string;
-    passwordRepeat: string;
-    isConsent: boolean;
-}
 
 export const initialValues:RegisterFormValues={
     email:'',

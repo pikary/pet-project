@@ -7,16 +7,26 @@ import {
     Formik,
     Form
 } from 'formik';
-import {initialValues, RegisterSchema} from "./helpers.ts";
+import {useNavigate} from "react-router-dom";
+import {useAppDispatch,useAppSelector} from "../../store/hooks.ts";
+import {initialValues, RegisterFormValues, RegisterSchema} from "./helpers.ts";
+import {authRegisterRequest} from "../../store/users/actions.ts";
 
 const Register: FC = () => {
-    const onSubmit = async () => {
-        try {
-
-        } catch (e) {
-
+    const navigate = useNavigate()
+    const {isLoading} = useAppSelector((state)=>state.user)
+    const dispatch = useAppDispatch()
+    const onSubmit = (values: RegisterFormValues) => {
+        const onSuccess = () =>{
+            navigate('/')
         }
-    }
+        try{
+            dispatch(authRegisterRequest(values, onSuccess));
+            console.log('try')
+        }catch (e) {
+            console.log('catch')
+        }
+    };
     return (
         <div className={'w-full h-full'}>
             <div className='w-full ' style={{
@@ -29,10 +39,7 @@ const Register: FC = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={RegisterSchema}
-                onSubmit={async (values) => {
-                    await new Promise((r) => setTimeout(r, 500));
-                    alert(JSON.stringify(values, null, 2));
-                }}
+                onSubmit={onSubmit}
                 validateOnChange={false}
                 validateOnBlur={false}
             >
@@ -88,7 +95,7 @@ const Register: FC = () => {
                         </Checkbox>
                         <Link className={'text-base underline text-primary'} to={'recovery'}>Terms</Link>
                     </div>
-                    <Button type={'submit'} text={'Register'} className={'text-lg text-white'}/>
+                    <Button disabled={isLoading } type={'submit'} text={'Register'} className={`text-lg text-white ${isLoading && 'bg-red-200'}`}/>
                 </Form>
             </Formik>
 
