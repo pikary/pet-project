@@ -9,7 +9,7 @@ import {User} from "./types.ts";
 function* fetchUsers(action: { type: string, payload: string }) {
     console.log('fetch users')
     try {
-        const response:ApiResponse<User[]> = yield call(baseRequest<User[]>,'GET',`users?username=${action.payload}`);
+        const response:ApiResponse<User[]> = yield call(baseRequest<User[]>,'GET',`users/search?username=${action.payload}`);
         yield put(fetchUsersSuccess(response.data));
     } catch (error) {
         yield put(fetchUsersError((error as Error).message));

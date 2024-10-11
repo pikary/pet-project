@@ -30,7 +30,7 @@ const Input: React.FC<InputProps> = ({
     return (
         <div>
             {labelText && (
-                <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
+                <label htmlFor={name} className="block text-gray-700 text-lg font-bold mb-2">
                     {labelText}
                 </label>
             )}

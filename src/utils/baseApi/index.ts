@@ -1,6 +1,8 @@
 import ApiError from './ApiError.ts'
 
 const API_URL = 'https://jsonplaceholder.typicode.com/pikary/api';
+const API_URL2 = 'http://localhost:5000';
+
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' ;
 
@@ -24,7 +26,7 @@ const baseRequest = async <ReturnType>(
     config: Config = {}
 ): Promise<ApiResponse<ReturnType> | undefined> => {
     try {
-        const req = await fetch(`${API_URL}/${url}`, {
+        const req = await fetch(`${API_URL2}/${url}`, {
             method,
             body: body ? JSON.stringify(body) : null,
             headers: {
@@ -42,7 +44,7 @@ const baseRequest = async <ReturnType>(
             throw new ApiError(req.status,resbody)
         }
 
-        return { data: result as ReturnType, headers: req.headers, statusCode: req.status };
+        return { data: result.data as ReturnType, headers: req.headers, statusCode: req.status };
     } catch (e: any) {
         console.error(e);
         throw e;

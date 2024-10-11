@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import './styles.scss';
+import React, {ReactNode} from 'react';
 import classnames from 'classnames';
 
 type ButtonType = 'pink' | 'blue';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: ReactNode | null;
     text?: string;
@@ -27,32 +27,21 @@ function Button(props: ButtonProps) {
     return (
         <button
             disabled={disabled || false}
-    onClick={onClick}
-    className={classnames('button', color, className)}
-    type={type}
+            onClick={onClick}
+            className={'w-full bg-primary text-base cursor-pointer flex justify-center items-center px-3 py-4 font-semibold rounded-lg' + className}
+            type={type}
         >
-        {/* {text && (
-          <p>
-              {text}
-          </p>
-          )} */}
-    {shortenText ? (
-        <>
-            <p className="button__mob-view">{shortenText}</p>
-            <p className="button__pc-view">{text}</p>
-        </>
-    ) : (
-        text && <p>{text}</p>
-    )}
-    {icon}
-    </button>
-);
+            <p>{text}</p>
+            {icon}
+        </button>
+    );
 }
 
 Button.defaultProps = {
     icon: null,
     className: '',
-    onClick: () => {},
+    onClick: () => {
+    },
     color: '',
     text: '',
     shortenText: '',
