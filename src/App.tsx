@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import UserProfile from "./pages/Profile";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import {FC} from "react";
 
 function App() {
@@ -38,6 +39,8 @@ const AuthContainer: FC = () => {
         <main>
             <Routes>
                 <Route path='login' element={<Login/>}/>
+                <Route path='register' element={<Register/>}/>
+
             </Routes>
         </main>
     )
