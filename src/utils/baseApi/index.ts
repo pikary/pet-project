@@ -26,7 +26,7 @@ const baseRequest = async <ReturnType>(
     config: Config = {}
 ): Promise<ApiResponse<ReturnType> | undefined> => {
     try {
-        const req = await fetch(`${API_URL2}/${url}`, {
+        const req = await fetch(`${API_URL}/${url}`, {
             method,
             body: body ? JSON.stringify(body) : null,
             headers: {
@@ -38,13 +38,12 @@ const baseRequest = async <ReturnType>(
             ...config,
         });
         const result = await req.json();
-
         if (!req.ok) {
             const resbody = await req.text();
             throw new ApiError(req.status,resbody)
         }
 
-        return { data: result.data as ReturnType, headers: req.headers, statusCode: req.status };
+        return { data: result as ReturnType, headers: req.headers, statusCode: req.status };
     } catch (e: any) {
         console.error(e);
         throw e;

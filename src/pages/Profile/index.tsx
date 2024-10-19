@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import IconButton from "../../components/IconButton"
 import Map from '../../components/Map'
+import Gallery from "./Gallery";
 
 const store = {
     currentUser:    {
@@ -201,6 +202,7 @@ const UserProfile = () => {
                     </div>
                 ))}
             </div>
+            <Gallery></Gallery>
         </div>
 
     );

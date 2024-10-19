@@ -1,5 +1,5 @@
-import React, {useState, ChangeEvent} from 'react';
-import { useField, Form, FormikProps, Formik } from 'formik';
+import React, { useState, ChangeEvent } from 'react';
+import { useField } from 'formik';
 
 interface InputProps {
     className?: string;
@@ -8,7 +8,10 @@ interface InputProps {
     placeholder?: string;
     name: string;
     icon?: string;
-    margin? :string
+    margin?: string;
+    formik?: boolean; // New prop to determine whether to use Formik or not
+    value?: string; // Used if not in Formik
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void; // Non-Formik onChange handler
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,13 +21,15 @@ const Input: React.FC<InputProps> = ({
                                          placeholder,
                                          name,
                                          icon,
-                                        margin
+                                         margin,
+                                         formik = true, // By default, assume Formik is being used
+                                         value,
+                                         onChange,
                                      }) => {
     const [focus, setFocus] = useState(false);
 
-
-    const [field,meta,helpers] = useField({name:name, type:'text'});
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [field, meta] = formik ? useField({ name, type }) : [{ value }, {}];
 
     return (
         <div className={margin}>
@@ -47,12 +52,11 @@ const Input: React.FC<InputProps> = ({
                     className={`px-2 py-1 rounded border border-transparent focus:border-black focus:shadow-[0px_0px_10px_1px_gray] transition ease-in-out delay-330 ${className}`}
                     aria-label={placeholder || labelText}
                     autoComplete="off"
-                    style={{paddingLeft: icon ? '30px' : undefined}} // Adjust padding if icon exists
-                    {...field}
+                    style={{ paddingLeft: icon ? '30px' : undefined }}
+                    {...(formik ? field : { value, onChange })}
                 />
             </div>
-            {meta.error && <span className={'block text-red-500 text-sm'}>{meta.error}</span>}
-
+            {meta?.error && <span className="block text-red-500 text-sm">{meta.error}</span>}
         </div>
     );
 };

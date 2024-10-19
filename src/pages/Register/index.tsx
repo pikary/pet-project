@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import {useAppDispatch,useAppSelector} from "../../store/hooks.ts";
 import {initialValues, RegisterFormValues, RegisterSchema} from "./helpers.ts";
 import {authRegisterRequest} from "../../store/users/actions.ts";
+import {unwrapResult} from "@reduxjs/toolkit";
 
 const Register: FC = () => {
     const navigate = useNavigate()
@@ -21,7 +22,9 @@ const Register: FC = () => {
             navigate('/')
         }
         try{
-            dispatch(authRegisterRequest(values, onSuccess));
+           const result =  dispatch(authRegisterRequest(values, onSuccess));
+            unwrapResult(result)
+            onSuccess()
             console.log('try')
         }catch (e) {
             console.log('catch')
@@ -95,6 +98,8 @@ const Register: FC = () => {
                         </Checkbox>
                         <Link className={'text-base underline text-primary'} to={'recovery'}>Terms</Link>
                     </div>
+                    <Button disabled={isLoading } type={'submit'} text={'Register'} className={`text-lg text-white ${isLoading && 'bg-red-200'}`} icon={<>Hello icon</>}/>
+
                     <Button disabled={isLoading } type={'submit'} text={'Register'} className={`text-lg text-white ${isLoading && 'bg-red-200'}`}/>
                 </Form>
             </Formik>

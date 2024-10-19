@@ -12,6 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     color?: ButtonType;
 }
 
+
 function Button(props: ButtonProps) {
     const {
         onClick,

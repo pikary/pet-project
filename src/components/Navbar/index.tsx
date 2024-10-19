@@ -6,7 +6,7 @@ const Header: React.FC = () => {
             <nav className="flex justify-between items-center">
                 <div className="flex space-x-5 basis-1/2">
                     <span className="text-white font-dancing text-3xl">BeyondTech</span>
-                    <UserSearch />
+                    <UserSearch/>
 
                 </div>
 

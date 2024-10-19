@@ -18,7 +18,8 @@ interface Company {
 }
 
 export interface User  {
-    id: number;
+    id?:number,
+    _id?: string;
     name: string;
     username: string;
     email: string;

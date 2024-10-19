@@ -6,7 +6,7 @@ export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
 export const fetchUsersRequest = (query: string) => ({type: FETCH_USERS_REQUEST, payload: query});
-export const fetchUsersSuccess = (user: User[]) => ({type: FETCH_USERS_SUCCESS, payload: user});
+export const fetchUsersSuccess = (users: User[]) => ({type: FETCH_USERS_SUCCESS, payload: users});
 export const fetchUsersError = (error: string) => ({type: FETCH_USERS_ERROR, payload: error});
 
 
@@ -27,6 +27,14 @@ export const authLoginRequest = (data: { email: string; password: string }) => (
 export const authLoginSuccess = (user: RegisterResponse) => ({type: AUTH_LOGIN_SUCCESS, payload: user});
 export const authLoginError = (error: string) => ({type: AUTH_LOGIN_ERROR, payload: error});
 
+
+// Get User
+export const FETCH_USER_BY_ID_REQUEST = 'FETCH_USER_BY_ID_REQUEST'
+export const FETCH_USER_BY_ID_ERROR = 'FETCH_USER_BY_ID_ERROR'
+export const FETCH_USER_BY_ID_SUCCESS = 'FETCH_USER_BY_ID_SUCCESS'
+export const fetchUserByIdRequest = (data: string) => ({type: FETCH_USER_BY_ID_REQUEST, payload: data});
+export const fetchUserByIdSuccess = (user:User) => ({type: FETCH_USER_BY_ID_SUCCESS, payload: user});
+export const fetchUserByIdError = (error: string) => ({type: FETCH_USER_BY_ID_ERROR, payload: error});
 
 
 
